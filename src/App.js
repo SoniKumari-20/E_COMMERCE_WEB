@@ -2,7 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import { useEffect } from 'react';
 import { getAllProductsData } from './components/api';
-
+import { HttpClient } from './components/api/HttpClient';
+HttpClient.setDefaultAxios()
 function App() {
 
   useEffect(() => {
