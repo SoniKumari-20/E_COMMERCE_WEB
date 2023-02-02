@@ -1,32 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
-import { useEffect } from 'react';
-import { getAllProductsData } from './components/api';
+import { useEffect, useContext } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { HttpClient } from './components/api/HttpClient';
+import { MainContext } from './components/Context/MainProvider';
+import { Home } from './components/Home';
+import { About } from './components/About';
+import { Header } from './components/Header';
+import '../src/components/style.css'
 HttpClient.setDefaultAxios()
 function App() {
+  const { getProducts } = useContext(MainContext);
+
+
 
   useEffect(() => {
-    getAllProductsData().then((rea) => {
-      console.log(rea, "res")
-    })
+    getProducts()
   }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Routes>
+        <Route path='/About' element={<About />}></Route>
+        <Route path='home' element={<Home />}></Route>
+      </Routes>
     </div>
   );
 }
