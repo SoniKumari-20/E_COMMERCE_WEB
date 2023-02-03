@@ -5,11 +5,14 @@ import { getAllProductsData } from '../api'
 export const MainContext = createContext({})
 
 export const MainProvider = ({children}) => {
-    const [allItems, setAllItems] = useState([])
+    const [allItems, setAllItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+
 
 
 const getProducts = async () => {
-    getAllProductsData().then((res) => setAllItems(res.data)).catch((err) => err)
+    getAllProductsData().then((res) => {setAllItems(res.data); setLoading(false)}
+    ).catch((err) => err)
 }
 
   return (
@@ -17,7 +20,8 @@ const getProducts = async () => {
         <MainContext.Provider
         value= {{
            getProducts,
-           allItems
+           allItems,
+           loading
         }}
         >
             {children}

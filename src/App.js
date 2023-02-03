@@ -8,7 +8,6 @@ import { About } from './components/About';
 import { Header } from './components/Header';
 import '../src/components/style.css'
 import Login from './Login';
-import { Loading } from './Loading';
 HttpClient.setDefaultAxios()
 function App() {
   const { getProducts } = useContext(MainContext);
@@ -25,9 +24,10 @@ function App() {
       <Routes>
         <Route path='/About' element={<About />}></Route>
         <Route path='home' element={<Home />}></Route>
+        <Route path='/login'  element={<Login />}></Route>
       </Routes>
-      <Login />
-      {/* <Loading /> */}
+      
+    
     </div>
   );
 }
