@@ -34,7 +34,7 @@ export const Home = () => {
                                                     <p className="card-text">{(items?.title).substring(0, 18)}...</p>
                                                     <div className="d-grid gap-2">
                                                         <Link to='/About' style={{ display: "block" }} className='btn btn-primary fluid' >
-                                                            Bye Now!!
+                                                            Buy Now!!
                                                         </Link>
 
                                                     </div>
