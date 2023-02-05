@@ -33,7 +33,7 @@ export const Home = () => {
                                                     <h5 className="card-title">{items?.category}</h5>
                                                     <p className="card-text">{(items?.title).substring(0, 18)}...</p>
                                                     <div className="d-grid gap-2">
-                                                        <Link to='/About' style={{ display: "block" }} className='btn btn-primary fluid' >
+                                                        <Link to={'/About/' + items?.id} style={{ display: "block" }} className='btn btn-primary fluid' >
                                                             Buy Now!!
                                                         </Link>
 

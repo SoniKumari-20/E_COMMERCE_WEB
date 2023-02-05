@@ -1,51 +1,72 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
+import { Loading } from '../Loading';
+import { getSingleProduct } from './api';
 
 export const About = () => {
-    return (
-        <div>About
+    const [item, setItem] = useState("");
+    const [loading, setLoading] = useState(false)
+    const { id } = useParams();
+    console.log(id)
 
-            <div class="container">
-                <div class="box one">
-                    <div class="details">
-                        <div class="topic">Description</div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque consequatur corporis vitae nobis, ut veniam earum expedita eaque at placeat perferendis unde voluptates explicabo rerum distinctio quis, illo, porro et?</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
+    useEffect(() => {
+        setLoading(true)
+        getSingleProduct(id).then((res) => { setItem(res.data); setLoading(false) }).catch((err => setItem([])))
+    }, [])
+
+
+
+
+    return (
+        <div>
+            <h1>About</h1>
+            {
+                loading ?
+                    <>
+                        <Loading />
+                    </> :
+                    <div class="container">
+                        <div class="box one">
+                            <div class="details">
+                                <div class="topic">Description</div>
+                                <p>{item?.description}</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+
+
+                                </div>
+                                <div class="price-box">
+                                    <div class="discount">{item?.discountPercentage}</div>
+                                    <div class="price">{item?.price}</div>
+                                </div>
+                            </div>
+                            <div class="button1">
+                                <button>Add To Cart</button>
+                            </div>
                         </div>
-                        <div class="price-box">
-                            <div class="discount">$1800.00</div>
-                            <div class="price">$1500.00</div>
-                        </div>
-                    </div>
-                    <div class="button1">
-                        <button>Add To Cart</button>
-                    </div>
-                </div>
-                <div class="box two">
-                    <div class="image-box">
-                        <div class="image">
-                            <img src="images/camera.png" alt="" />
-                        </div>
-                        <div class="info">
-                            <div class="brand">SONY</div>
-                            <div class="name">SONY ALPHA A7 KIT</div>
-                            <div class="shipping">FREE SHIPPING</div>
-                            <div class="button2">
-                                <button>Login For More</button>
+                        <div class="box two">
+                            <div class="image-box">
+                                <div class="image">
+                                    <img src={item?.thumbnail} alt="" />
+                                </div>
+                                <div class="info">
+                                    <div class="brand">{item?.brand}</div>
+                                    <div class="name">{item?.title}</div>
+                                    <div class="shipping">FREE SHIPPING</div>
+                                    <div class="button2">
+                                        <button>Go To Cart</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+
+
+
+            }
+
 
 
         </div>
