@@ -8,6 +8,7 @@ import { About } from './components/About';
 import { Header } from './components/Header';
 import '../src/components/style.css'
 import Login from './Login';
+import { CartItems } from './components/CartItems';
 HttpClient.setDefaultAxios()
 function App() {
   const { getProducts } = useContext(MainContext);
@@ -25,6 +26,7 @@ function App() {
         <Route path='/About/:id' element={<About />}></Route>
         <Route path='/home' element={<Home />}></Route>
         <Route path='/'  element={<Login />}></Route>
+        <Route path='/cartItems'  element={<CartItems />}></Route>
       </Routes>
       
     

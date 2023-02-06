@@ -4,13 +4,20 @@ import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { MainContext } from './Context/MainProvider'
 import { Loading } from '../Loading'
+import { _ } from 'lodash'
 
-export const Home = () => {
+const pagesize = 10;
+ export const Home = () => {
 
     const { allItems, loading } = useContext(MainContext);
     console.log(allItems)
 
 
+const pageCount = allItems? Math.ceil(allItems?.products?.length/pagesize) : 0 
+console.log(pageCount)
+if(pageCount === 1) return null;
+// const pages =  _.range(1, pageCount+1)
+// console.log(pages)
     return (
         <div>
             <h1>
@@ -30,13 +37,13 @@ export const Home = () => {
                                             <div className="card  cart_item  box1 " key={id + 1} >
                                                 <img className="card-img-top" src={items?.images[0]} alt="Card image cap" height={"200px"} />
                                                 <div className="card-body text-center " height={"230px"} width={"230px"}>
-                                                    <h5 className="card-title">{items?.category}</h5>
-                                                    <p className="card-text">{(items?.title).substring(0, 18)}...</p>
+                                                    <h5 className="card-title">{(items?.title).substring(0,18)}</h5>
+                                                    <p className="card-text">{(items?.description).substring(0, 18)}...</p>
+                                                    <h6>$ {items?.price}</h6>
                                                     <div className="d-grid gap-2">
                                                         <Link to={'/About/' + items?.id} style={{ display: "block" }} className='btn btn-primary fluid' >
                                                             Buy Now!!
                                                         </Link>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -46,6 +53,8 @@ export const Home = () => {
                         </div>
                     </div>
             }
+
+            
         </div>
     )
 }

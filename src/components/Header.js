@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { MainContext } from './Context/MainProvider'
+import { Link } from 'react-router-dom'
 import './style.css'
 export const Header = () => {
+  const {cartItems} = useContext(MainContext)
+  console.log(cartItems)
   return (
     <div>
     <nav>
@@ -10,11 +14,16 @@ export const Header = () => {
         <i className="fas fa-bars"></i>
       </label>
       <ul>
-        <li  ><button className="btn btn-outline-light my-2 my-sm-0">Home</button></li>
-        <li className="btn btn-outline-light my-2 my-sm-0">About</li>
+        <Link to='/home'><button className="btn btn-outline-light  ">Home</button></Link>
+        <Link to='/About/'><li className="btn btn-outline-light my-2 my-sm-0 a">About</li></Link>
         <li className="btn btn-outline-light my-2 my-sm-0">Services</li>
         <li className="btn btn-outline-light my-2 my-sm-0">Gallery</li>
-        <li className="btn btn-outline-light my-2 my-sm-0">Feedback</li>
+        <div className="btn btn-light my-2 my-sm-0"  >
+        <div className='plus_product'>
+                <h5>{cartItems?.length}</h5>
+              </div>
+              <i className="fa fa-shopping-cart" style={{fontSize:20}}></i>
+        </div>
       </ul>
     </nav>
 

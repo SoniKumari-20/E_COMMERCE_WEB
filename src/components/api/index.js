@@ -2,7 +2,7 @@ import { HttpClient } from "./HttpClient"
 
 const getAllProductsData = ({ skip = 0 } = {}) => {
     const apiData = {
-        url: `/products?limit=30&skip=${skip}`,
+        url: `/products?limit=20&skip=${skip}`,
         method: "GET",
     }
     return HttpClient.custom(apiData)
