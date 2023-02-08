@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Loading } from '../Loading';
 import { getSingleProduct } from './api';
 import { useContext } from 'react';
 import { MainContext } from './Context/MainProvider';
 import { Carousel } from 'react-responsive-carousel';
-import './style.css'
-
+import './AboutPage.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import  img1 from './Screenshot (206).png'
 
 
 export const About = () => {
@@ -25,10 +24,10 @@ export const About = () => {
         getSingleProduct(id).then((res) => { setItem(res.data); setLoading(false) }).catch((err => setItem([])))
     }, [])
 
-    // function handleAddToCart(id) {
-    //     handleAddDataIntoCart(id)
+    function handleAddToCart(id) {
+        handleAddDataIntoCart(id)
 
-    // }
+    }
 
 
 
@@ -40,18 +39,61 @@ export const About = () => {
                 loading ?
                     <>
                         <Loading />
-                    </> :
-                    <div className='outerCrow' >
-                            <div className='crrrr d-flex justify-content-center'>
-                        <Carousel showArrows={true} style={{innerHeight:500}}  >
-                        
-   <div className='craousel'><img src={item?.images[0]} ></img></div>
-   <div className='craousel'><img src={item?.thumbnail}></img></div>
-   <div className='craousel'><img src={item?.images[1]}></img></div>
+                    </> : <>
+<div className='d-flex justify-content-center'> 
+                        <div class="Container">
+                            <div class="box one">
+                                <div class="details">
+                                    <div class="topic">Description</div>
+                                    <p>{item?.description}</p>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <h5>{item?.rating}</h5>
+                                    </div>
+                                    <div class="price-box">
+                                        <div class="discount">{item?.discountPercentage} % </div>
+                                        <div class="price">${item?.price}</div>
+                                    </div>
+                                </div>
+                                <div class="button1">
+                                    <button onClick={() => handleAddToCart(item?.id)}>Add To Cart</button>
+                                </div>
+                            </div>
+                            <div class="box two">
+                                <div class="image-box">
+                                    <div class="image">
+                                  
 
-                        </Carousel>
-                    </div>
-                    </div>
+<Carousel showArrows={true} style={{ width: "300px" }} >
+    <div className='craousel'><img src={item?.images[0]} height='150px'  ></img></div>
+    <div className='craousel'><img src={item?.thumbnail} height='150px'></img></div>
+    <div className='craousel'><img src={item?.images[1]} height='150px'></img></div>
+
+</Carousel>
+
+                                        {/* <!---<img src="images/camera.png" alt="">----> */}
+                                </div>
+                                    <div class="info">
+                                        <div class="brand">{item?.brand}</div>
+                                        <div class="name">{item?.title}</div>
+                                        <div class="shipping">FREE SHIPPING</div>
+                                        <div class="button2">
+                                            <Link  to={'/cartItems'}><button> <i class="fa-solid fa-arrow-left"></i>    Go To Home </button></Link>
+                                            <Link to={'/home'}><button>Go To Cart  <i class="fa-solid fa-arrow-right"></i></button></Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
+                        </div>
+                    </>
 
 
 

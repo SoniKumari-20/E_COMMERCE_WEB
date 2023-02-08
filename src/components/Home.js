@@ -6,12 +6,19 @@ import { MainContext } from './Context/MainProvider'
 import { Loading } from '../Loading'
 import { _ } from 'lodash'
 
+import ReactPaginate from 'react-paginate'
+
+
 const pagesize = 10;
  export const Home = () => {
 
     const { allItems, loading } = useContext(MainContext);
     console.log(allItems)
 
+
+    const handleOnPage = (data) => {
+        console.log("clicked", data)
+    }
 
 const pageCount = allItems? Math.ceil(allItems?.products?.length/pagesize) : 0 
 console.log(pageCount)
@@ -51,7 +58,26 @@ if(pageCount === 1) return null;
                                     )}
                             </div>
                         </div>
+                                        <ReactPaginate 
+                                        previousLabel={"previous"}
+                                        nextLabel={'next'}
+                                        pageCount = {5}
+                                        pageRangeDisplayed={2}
+                                        marginPagesDisplayed={2}
+                                        onPageChange = {handleOnPage}
+                                        containerClassName={"pagination justify-content-center"}
+                                        pageClassName={"page-item"}
+                                        pageLinkClassName={"page-link"}
+                                        previousClassName = { "page-item " }
+                                        previousLinkClassName = { "page-link" }
+                                        nextClassName = {"page-item"}
+                                        nextLinkClassName = { "page-link" }
+                                        activeClassName = {"active"}
+                                        >
+                                            
+                                        </ReactPaginate>
                     </div>
+                    
             }
 
             

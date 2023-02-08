@@ -15,7 +15,7 @@ export const Header = () => {
       </label>
       <ul>
         <Link to='/home'><button className="btn btn-outline-light  ">Home</button></Link>
-        <Link to='/About/'><li className="btn btn-outline-light my-2 my-sm-0 a">About</li></Link>
+        <Link to='/users'><li className="btn btn-outline-light my-2 my-sm-0 a">Users</li></Link>
         <li className="btn btn-outline-light my-2 my-sm-0">Services</li>
         <li className="btn btn-outline-light my-2 my-sm-0">Gallery</li>
         <div className="btn btn-light my-2 my-sm-0"  >

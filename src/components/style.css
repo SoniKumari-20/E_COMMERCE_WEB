@@ -125,158 +125,7 @@ input[type="checkbox"]{
 
 
 
-/* About Page */
 
-::selection{
-  background: #fee6eb;
-}
-/* body:before{
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  clip-path: circle(55% at right 30%);
-  
-} */
-.Container{
-  display: flex;
-  max-width: 750px;
-  background: #fff;
-  border-radius: 12px;
-  justify-content: space-between;
-  box-shadow: 0px 5px 10px rgba(228, 15, 15, 0.89);
-  position: relative;
-}
-.Container::before{
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  border-radius: 12px;
-  clip-path: circle(65% at right 35%);
-  background-image: linear-gradient( 135deg,  #fd9bb0 10%, #F6416C 100%);
-}
-.Container .box.one{
-  padding: 35px 5px 0px 35px;
-}
-.box.one .details .topic{
-  font-size: 30px;
-  font-weight: 500;
-}
-.box.one .details p{
-  color: #737373;
-  font-size: 13px;
-  font-weight: 500;
-}
-.box.one .rating{
-  color: #fd9bb0;
-  font-size: 14px;
-  margin-top: 10px;
-}
-.box.one .price-box{
-  margin-top: 16px;
-}
-.box.one .discount{
-  font-size: 20px;
-  margin: 10px 0 0 12px;
-  position: relative;
-  color: #737373;
-}
-.box.one .discount:before{
-  position: absolute;
-  height: 1px;
-  width: 100px;
-  background: #737373;
-  top: 50%;
-  left: -8px;
-}
-.box.one .price{
-  color: #fc6989;
-  font-size: 30px;
-}
-.box.one .button1{
-  margin-top: 55px;
-}
-.box.one .button1 button{
-  outline: none;
-  border:none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 18px;
-  font-weight: 500;
-  color: #fff;
-  background: #00e6e6;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.button1 button:hover{
-  transform: scale(1.2);
-}
-.Container .box.two .image-box .image{
-  /* border: 3px solid blue; */
-  position: relative;
-  right: 0;
-  top: 0;
-  height: 340px;
-  width: 430px;
-  /* border-radius: 20px; */
-}
-.Container .box.two .image-box .image .slide{
-  height: 300px;
-  width: 300px;
-border-radius: 20px;
-  object-fit: cover;
-  margin-top: 20px;
-  margin-left: 100px;
-}
-.Container .box.two .image-box{
-  position: relative;
-  text-align: right;
-  right: 0;
-  bottom: 27px;
-  border-radius: 20px;
-  /* height: 100px; */
-}
-
-.box.two .image-box .info{
-  margin: 0 35px 0 0;
-}
-.box.two .info .brand{
- font-size: 17px;
- font-weight: 600;
- color: #c9032e;
-}
-.box.two .info .name{
- font-size: 20px;
- font-weight: 500;
- color: #fff;
-}
-.box.two .info .shipping{
- font-size: 14px;
- font-weight: 400;
- color: #000;
-}
-.box.two .button2{
-  margin: 17px 0;
-}
-.button2 button{
-  outline: none;
-  color: #fff;
-  border: 1px solid #fff;
-  border-radius: 12px;
-  padding: 8px 17px;
-  background: transparent;
-  font-size: 15px;
-  font-weight: 400;
-  cursor: pointer;
-}
-.button2 button:hover{
-  transform: scale(1.2);
-  background-color: white;
-  color: black;
-}
 
 
 
@@ -458,13 +307,7 @@ input{
 
 /* eshdbvhsdv */
 /* Google Fonts - Poppins */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
-* {
-  
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
 .plus_product {
   position: absolute;
   font-size: large;
@@ -478,88 +321,124 @@ input{
 }
 
 
+/* Users  Starting */
 
-.container {
-  max-width: 1120px;
+
+.content{
+  max-width: 1090px;
   width: 100%;
-  padding: 40px 0;
-}
-.slide-container {
-  margin: 0 30px;
-  overflow: hidden;
-}
-.card {
-  background: #fff;
-  border-radius: 8px;
-}
-.card .image-box {
-  height: 200px;
-}
-.card .image-box img {
-  width: 100%;
-  height: 100%;
-  border-radius: 8px 8px 0 0;
-}
-.card .profile-details {
+  margin: auto;
   display: flex;
-  align-items: center;
-  column-gap: 12px;
-  padding: 15px;
-}
-.card .profile-details img {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-}
-.profile-details .name {
-  font-size: 15px;
-  font-weight: 500;
-}
-.profile-details .job {
-  font-size: 12px;
-  font-weight: 500;
-  color: #4d4d4d;
-}
-
-.swiper-navBtn {
-  color: #000;
-  height: 40px;
-  width: 40px;
-  background: #fff;
-  border-radius: 50%;
-}
-.swiper-navBtn::before,
-.swiper-navBtn::after {
-  font-size: 18px;
-}
-
-.swiper-pagination-bullet {
-  background-color: #000;
-}
-
-@media screen and (max-width: 768px) {
-  .swiper-navBtn {
-    display: none;
-  }
-}
-
-
-
-/* crausel */
-
-.craousel {
-  height: 200px;
-    margin: 30px;
-    width: 200px;
-    border: 3px solid rgb(0, 68, 255);
-}
-.crrr{
-  height: 280px;
-  width: 300px;
-}
-.outerCrow{
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  width: 500px;
+  flex-wrap: wrap;
 }
+ .content .card{
+  background: #fff;
+  width: calc(33% - 20px);
+  text-align: center;
+  padding: 15px 30px  30px 30px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+.content .card .top{
+  height: 130px;
+  color: #fff;
+  padding: 12px 0 0 0 ;
+  clip-path: polygon(0 0, 100% 0, 100% 53%, 49% 100%, 0 53%);
+}
+
+.content .card .top .title{
+ font-size: 27px;
+ font-weight: 600;
+}
+.content .card .top .price-sec{
+  margin-top: -10px;
+  font-weight: 600;
+}
+.content .card .top .price{
+  font-size: 45px;
+}
+.content .card .info{
+  font-size: 16px;
+  margin-top: 20px;
+}
+.content .card .details .one{
+  margin-top: 25px;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.content .card .details .one::before{
+  position: absolute;
+  content: "";
+  width: 100%;
+  background: #ddd;
+  height: 1px;
+  left: 0;
+  top: -12px;
+  border-radius: 25px;
+}
+.content .card .details .one i{
+  color: #2db94d;
+}
+.content .card .details i.fa-times{
+  color: #cd3241;
+}
+.content .card button{
+  outline: none;
+  border: none;
+  height: 42px;
+  color: #fff;
+  margin-top: 30px;
+  border-radius: 3px;
+  font-size: 18px;
+  width: 100%;
+  display: block;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+.content .one .top,
+.content .one button{
+  background: #14eb6e;
+}
+.content .two .top,
+.content .two button{
+  background: #e87130;
+}
+.content .three .top,
+.content .three button{
+  background: #11BCC3;
+}
+.content button:hover {
+  filter: brightness(90%);
+}
+.content .one ::selection{
+background: #8af5b6;
+}
+.content .two ::selection{
+background:  #f2b08c;
+}
+.content .three ::selection{
+background: #d0f9fb;
+}
+@media (max-width:1000px) {
+   .content .card{
+    background: #fff;
+    width: calc(50% - 20px);
+    margin-bottom: 30px;
+}
+}
+@media (max-width:715px) {
+ .content .card{
+    width: 100%;
+}
+}
+/* ending of users */
+
+
+
+
+
+

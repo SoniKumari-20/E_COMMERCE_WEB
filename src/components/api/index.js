@@ -1,6 +1,6 @@
 import { HttpClient } from "./HttpClient"
 
-const getAllProductsData = ({ skip = 0 } = {}) => {
+const getAllProductsData = ({ skip = 0}) => {
     const apiData = {
         url: `/products?limit=20&skip=${skip}`,
         method: "GET",
@@ -41,6 +41,31 @@ const getCategoryProducts = (category) => {
     }
     return HttpClient.custom(apiData)
 }
+const getLoginUser = (userData) => {
+    const apiData = {
+        url: `/auth/login`,
+        method: "POST",
+        data: userData
+    }
+    return HttpClient.custom(apiData)
+}
+
+
+const getAllUsers = () => {
+    const apiData = {
+        url: `/users`,
+        method : 'GET',
+    }
+    return HttpClient.custom(apiData)
+}
+
+const getSingleUser = (Id) => {
+    const apiData ={
+        url: `/users/${Id}`,
+        method: 'GET',
+    }
+    return HttpClient.custom(apiData)
+} 
 
 
 
@@ -49,5 +74,8 @@ export {
     getSingleProduct,
     getFilterProducts,
     getProductCategories,
-    getCategoryProducts
+    getCategoryProducts,
+    getLoginUser,
+    getAllUsers,
+    getSingleUser
 }
