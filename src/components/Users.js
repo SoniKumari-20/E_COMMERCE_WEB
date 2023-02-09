@@ -2,16 +2,22 @@ import React from 'react'
 import { MainContext } from './Context/MainProvider'
 import { useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { Loading } from '../Loading'
 
 
 export const Users = () => {
-    const { getAllUser, users } = useContext(MainContext)
+    const { getAllUser, users, loading } = useContext(MainContext)
 
     useEffect(() => {
         getAllUser()
     }, [])
     return (
-        <div>
+        <>
+        {
+            loading ? <>
+            <Loading />
+            </> :
+            <div className='container'>
             <h1>
                 !!      All Users !!
             </h1>
@@ -53,5 +59,7 @@ export const Users = () => {
                 </tbody>
             </table>
         </div>
+        }
+        </>
     )
 }

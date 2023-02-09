@@ -1,37 +1,42 @@
 import React from 'react'
 import './style.css'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { MainContext } from './Context/MainProvider'
 import { Loading } from '../Loading'
 import { _ } from 'lodash'
 
 import ReactPaginate from 'react-paginate'
+import { getPageNo, getAllProductsData } from './api'
 
-
-const pagesize = 10;
+ 
  export const Home = () => {
-
-    const { allItems, loading } = useContext(MainContext);
+    
+    const [skipNo, setSkipNo] = useState(0)
+    let numberIs = 20
+    const { allItems, loading, getProducts, productLoading } = useContext(MainContext);
     console.log(allItems)
 
 
+
+
     const handleOnPage = (data) => {
-        console.log("clicked", data)
+        console.log(data)
+        let PageNo = data.selected + 1;
+        
+        getProducts(PageNo)
+        setSkipNo(PageNo)
+       
     }
 
-const pageCount = allItems? Math.ceil(allItems?.products?.length/pagesize) : 0 
-console.log(pageCount)
-if(pageCount === 1) return null;
-// const pages =  _.range(1, pageCount+1)
-// console.log(pages)
+
     return (
         <div>
             <h1>
                 HOME
             </h1>
             {
-                loading ? <>
+                productLoading ? <>
                     <Loading />
                 </> :
 
