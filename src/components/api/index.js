@@ -51,9 +51,9 @@ const getLoginUser = (userData) => {
 }
 
 
-const getAllUsers = () => {
+const getAllUsers = ({ skip = 0} = {}) => {
     const apiData = {
-        url: `/users`,
+        url: `/users?limit=20&skip=${skip}`,
         method : 'GET',
     }
     return HttpClient.custom(apiData)
@@ -67,33 +67,33 @@ const getSingleUser = (Id) => {
     return HttpClient.custom(apiData)
 }
 
-const getAllposts = () => {
+const getAllposts = ({skip = 0} = {}) => {
     const apiData = {
-        url: `/posts`,
+        url: `/posts?limit=20&skip=${skip}`,
         method: "GET",
     }
     return HttpClient.custom(apiData)
 }
 
-const getAllComments = () => {
+const getAllComments = ({skip = 0} = {}) => {
     const apiData = {
-        url: `/comments`,
+        url: `/comments?limit=20&skip=${skip}`,
         method: "GET",
     }
     return HttpClient.custom(apiData)
 }
 
-const getAllTodos = () => {
+const getAllTodos = ({skip = 0} = {}) => {
     const apiData = {
-        url: `/todos`,
+        url: `/todos?limit=20&skip=${skip}`,
         method: "GET",
     }
     return HttpClient.custom(apiData)
 }
 
-const getAllQuotes = () => {
+const getAllQuotes = ({skip = 0} = {}) => {
     const apiData = {
-        url: `/quotes`,
+        url: `/quotes?limit=20&skip=${skip}`,
         method: "GET",
     }
     return HttpClient.custom(apiData)

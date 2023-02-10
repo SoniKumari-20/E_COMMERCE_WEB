@@ -17,7 +17,7 @@ export const About = () => {
     const { handleAddDataIntoCart } = useContext(MainContext);
     const { id } = useParams();
 
-    console.log(id)
+    // console.log(id)
 
     useEffect(() => {
         setLoading(true);

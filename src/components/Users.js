@@ -1,16 +1,26 @@
 import React from 'react'
 import { MainContext } from './Context/MainProvider'
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Loading } from '../Loading'
+import  ReactPaginate from 'react-paginate'
 
 
 export const Users = () => {
     const { getAllUser, users, loading } = useContext(MainContext)
+    const [skip, setskip] = useState(0)
 
     useEffect(() => {
         getAllUser()
     }, [])
+
+    const handleOnPage = (data) => {
+        console.log(data)
+        let PageNo = data.selected + 1;
+       setskip(PageNo)
+        getAllUser(PageNo)
+    }
+
     return (
         <>
         {
@@ -41,7 +51,7 @@ export const Users = () => {
                         users?.users?.map((e, id) =>
                             <>
                                 <tr className='table-danger' key={id}>
-                                    <th scope="row">{id + 1}</th>
+                                    <th scope="row">{e?.id}</th>
                                     <td ><img src={e.image} alt='' height='60px' width='60px'></img></td>
                                     <td>{(e?.firstName) + " " + (e?.lastName)}</td>
                                     <td>{e?.email}</td>
@@ -58,6 +68,26 @@ export const Users = () => {
                     }
                 </tbody>
             </table>
+            <ReactPaginate 
+                                        previousLabel={"previous"}
+                                        nextLabel={'next'}
+                                    
+                                        pageCount = {5}
+                                        pageRangeDisplayed={3}
+                                        marginPagesDisplayed={3}
+                                        onPageChange = {handleOnPage}
+                                        containerClassName={"pagination justify-content-center "}
+                                        pageClassName={"page-item "}
+                                        pageLinkClassName={"page-link"}
+                                        previousClassName = { "page-item " }
+                                        previousLinkClassName = { "page-link" }
+                                        nextClassName = {"page-item"}
+                                        nextLinkClassName = { "page-link" }
+                                        activeClassName = {"active"}
+                                        activeLinkClassName={"active-link"}
+                                        >
+                                            
+                                        </ReactPaginate>
         </div>
         }
         </>

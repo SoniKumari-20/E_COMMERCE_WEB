@@ -5,16 +5,13 @@ import { Link } from 'react-router-dom'
 import { MainContext } from './Context/MainProvider'
 import { Loading } from '../Loading'
 import { _ } from 'lodash'
-
 import ReactPaginate from 'react-paginate'
-import { getPageNo, getAllProductsData } from './api'
+
 
  
  export const Home = () => {
-    
     const [skipNo, setSkipNo] = useState(0)
-    let numberIs = 20
-    const { allItems, loading, getProducts, productLoading } = useContext(MainContext);
+    const { allItems, getProducts, productLoading } = useContext(MainContext);
     console.log(allItems)
 
 

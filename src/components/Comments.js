@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Loading } from '../Loading';
+import ReactPaginate from 'react-paginate'
 
 
 import { MainContext } from './Context/MainProvider'
@@ -7,9 +8,19 @@ import { MainContext } from './Context/MainProvider'
 export const Comments = () => {
     const { AllComments, getAllComment, loading } = useContext(MainContext);
     console.log(AllComments)
+    const [skip, setSkip] = useState(0);
+
+
     useEffect(() => {
         getAllComment()
     }, [])
+
+    const handleOnPage = (data) => {
+        // console.log(data)
+        const PageNo = data.selected + 1;
+        setSkip(PageNo)
+        getAllComment(PageNo)
+    }
 
 
     return (
@@ -19,17 +30,17 @@ export const Comments = () => {
                 loading ? <>
                     <Loading />
                 </> :
-                <>
-        
+                    <>
+
                         <div className='container'>
-                            <table class="table table-info" style={{ textAlign: 'center', border: "1px solid black" }}>
+                            <table className="table table-info" style={{ textAlign: 'center', border: "1px solid black" }}>
                                 <thead  >
                                     <tr className='table-info'  >
                                         <th scope="col" style={{ border: "2px solid black", boxShadow: " 1px 2px 8px 4px pink" }}>Id</th>
                                         <th scope="col" style={{ border: "2px solid black", boxShadow: " 1px 2px 8px 4px pink" }}>User's Name</th>
                                         <th scope="col" style={{ border: "2px solid black", boxShadow: " 1px 2px 8px 4px pink" }}>Comment</th>
                                         <th scope="col" style={{ border: "2px solid black", boxShadow: " 1px 2px 8px 4px pink" }}>Post ID</th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody >
@@ -42,20 +53,38 @@ export const Comments = () => {
                                                     <td style={{ border: "2px solid black", boxShadow: " 1px 1px 8px 2px pink" }}>{e?.user?.username}</td>
                                                     <td style={{ border: "2px solid black", boxShadow: " 1px 1px 8px 2px pink" }}>{e?.body}</td>
                                                     <th scope="col" style={{ border: "2px solid black", boxShadow: " 1px 2px 8px 4px pink" }}>{e?.postId}</th>
-                                        
+
                                                 </tr>
                                             </>
                                         )
                                     }
                                 </tbody>
                             </table>
-                        </div>
-                </>
-            
-                
-                    
-}
-                    </div>
+                            <ReactPaginate
+                                previousLabel={"previous"}
+                                nextLabel={'next'}
+                                pageCount={17}
+                                pageRangeDisplayed={2}
+                                marginPagesDisplayed={8}
+                                onPageChange={handleOnPage}
+                                containerClassName={"pagination justify-content-center"}
+                                pageClassName={"page-item"}
+                                pageLinkClassName={"page-link"}
+                                previousClassName={"page-item "}
+                                previousLinkClassName={"page-link"}
+                                nextClassName={"page-item"}
+                                nextLinkClassName={"page-link"}
+                                activeClassName={"active"}
+                            >
 
-  )
+                            </ReactPaginate>
+                        </div>
+                    </>
+
+
+
+            }
+        </div>
+
+    )
 }
