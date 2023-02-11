@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { createContext, useState } from 'react'
 import {
     getAllProductsData,
@@ -72,7 +72,9 @@ export const MainProvider = ({ children }) => {
 
     const handleAddDataIntoCart = (id) => {
         let itemId = Number(id)
+        // console.log(itemId, "isdbhb")
         let cartTempItems = [...cartItems]
+        // console.log(cartTempItems,"cart")
         if (cartTempItems.find(e => e.id === itemId)) {
             cartTempItems.forEach((e => {
                 if (e.id === itemId) {
@@ -85,6 +87,12 @@ export const MainProvider = ({ children }) => {
         setCartItems(cartTempItems)
     }
 
+useEffect(() => {
+  console.log(cartItems, "cartItem")
+},[cartItems])
+
+
+
     return (
         <div>
             <MainContext.Provider
@@ -95,6 +103,7 @@ export const MainProvider = ({ children }) => {
                     loading,
                     handleAddDataIntoCart,
                     cartItems,
+                    setCartItems,
                     getAllUser,
                     users,
                     productLoading,

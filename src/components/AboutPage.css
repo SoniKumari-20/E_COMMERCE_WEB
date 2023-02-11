@@ -150,6 +150,15 @@
     font-weight: 400;
     cursor: pointer;
   }
+
+  .carousel .carousel-status{
+    content-visibility: hidden;
+  }
+  .carousel.carousel-slider .control-arrow:hover {
+    background: none;
+}
+
+
   
 
   /*  singleUsers */
@@ -158,8 +167,9 @@
     background: #1cc7d0;
   }
   .wrapper{
-    height: 400px;
-    width: 320px;
+    height: 450px;
+    width: 550px;
+    margin-left: 60px;
     position: relative;
     transform-style: preserve-3d;
     perspective: 1000px;
@@ -221,4 +231,12 @@
     list-style-type: none;
   }
 
-  
+  /* cartitems */
+  .QuantityContainer button{
+    margin-left: 10px;
+  }
+
+  .card{
+    background-color: #ffb4c4;
+    box-shadow: 1px 2px 8px 2px rgb(49, 40, 40);
+  }
