@@ -20,7 +20,7 @@ export const CartItems = () => {
 
   const setQuantity = (id, data) => {
     let tempData = [...cartItems]
-    console.log(tempData)
+    // console.log(tempData)
     tempData.forEach(e => {
       if (e.id === id) {
         e.count += data

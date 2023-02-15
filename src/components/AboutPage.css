@@ -136,9 +136,9 @@
    font-weight: 400;
    color: #000;
   }
-  .box.two .button2{
+  /* .box.two .button2{
     margin: 17px 0;
-  }
+  } */
   .button2 button{
     outline: none;
     color: #fff;
@@ -236,7 +236,7 @@
     margin-left: 10px;
   }
 
-  .card{
+  .Card{
     background-color: #ffb4c4;
     box-shadow: 1px 2px 8px 2px rgb(49, 40, 40);
   }

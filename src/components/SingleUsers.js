@@ -69,14 +69,14 @@ export const SingleUsers = () => {
                     </div>
                 </div>
                 <div className='d-flex justify-content-space-evenly flex-wrap' style={{marginTop: "20px", marginLeft:"50px"}} >
-                    <div class="card " style={{ width: "280px", margin:"10px"}} >
+                    <div class="Card " style={{ width: "280px", margin:"10px"}} >
                         <div class="card-body" >
                             <h5 class="card-title">Todos</h5>
                             <p class="card-text">{SingleTodo?.todo}</p>
 
                         </div>
                     </div>
-                    <div class="card" style={{ width: "280px", margin:"10px" }}>
+                    <div class="Card" style={{ width: "280px", margin:"10px" }}>
                         <div class="card-body">
                             <h5 class="card-title">Quotes</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{singleQuote?.author}</h6>
@@ -84,7 +84,7 @@ export const SingleUsers = () => {
 
                         </div>
                     </div>
-                    <div class="card" style={{ width: "280px", margin:"10px" }} >
+                    <div class="Card" style={{ width: "280px", margin:"10px" }} >
                         <div class="card-body">
                             <h5 class="card-title">Comments</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{singleComment?.user?.username}</h6>
@@ -92,7 +92,7 @@ export const SingleUsers = () => {
 
                         </div>
                     </div>
-                    <div class="card" style={{ width: "880px", margin:"10px" }}>
+                    <div class="Card" style={{ width: "880px", margin:"10px" }}>
                         <div class="card-body">
                             <h5 class="card-title">Posts</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{singlePost?.title}</h6>

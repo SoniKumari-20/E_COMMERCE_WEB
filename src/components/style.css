@@ -1,6 +1,5 @@
 *{
-    box-sizing: border-box;
-   
+    box-sizing: border-box;   
 }
 .margin {
     display: flex;
@@ -158,10 +157,8 @@ input[type="checkbox"]{
 
 
 /* Login form */
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
 body{
-  font-family: 'Poppins', sans-serif;
   background: linear-gradient(to right, #20002c,
  #cbb4d4);
 }
@@ -199,7 +196,7 @@ input{
     display: block;
     width: 90%;
     background: transparent;
-    border: none;
+    /* border: none; */
     outline: none;
     border-bottom: 1px solid white;
     padding: 10px;
@@ -222,6 +219,7 @@ input{
 
 /* Loading */
 .loading-bar {
+  content: "";
   width: 100%;
   display: flex;
   position: relative;
@@ -325,7 +323,7 @@ input{
 
 
 .content{
-  max-width: 1090px;
+  /* max-width: 1090px; */
   width: 100%;
   margin: auto;
   display: flex;

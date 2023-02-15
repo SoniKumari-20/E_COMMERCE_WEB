@@ -6,7 +6,8 @@ import {
     getAllposts,
     getAllComments,
     getAllQuotes,
-    getAllTodos
+    getAllTodos,
+    getProductCategories
 } from '../api'
 
 export const MainContext = createContext({})
@@ -21,6 +22,7 @@ export const MainProvider = ({ children }) => {
     const [AllComments, setAllComments] = useState([])
     const [AllTodos, setAllTodos] = useState([])
     const [AllQuotes, setAllQuotes] = useState([])
+    const [category, setCategory] = useState([])
 
 
 
@@ -33,6 +35,11 @@ export const MainProvider = ({ children }) => {
             setProductLoading(false)
         }
         ).catch((err) => err)
+    }
+
+
+    const getCategory = async () => {
+        getProductCategories().then((res)=> setCategory(res.data)).catch((err => console.log("error", err)))
     }
 
 
@@ -87,9 +94,9 @@ export const MainProvider = ({ children }) => {
         setCartItems(cartTempItems)
     }
 
-useEffect(() => {
-  console.log(cartItems, "cartItem")
-},[cartItems])
+// useEffect(() => {
+// //   console.log(cartItems, "cartItem")
+// },[cartItems])
 
 
 
@@ -115,8 +122,9 @@ useEffect(() => {
                     AllQuotes,
                     getAllTodo,
                     AllTodos,
-
-
+                    getCategory,
+                    category
+                    
 
                 }}
             >

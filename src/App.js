@@ -17,12 +17,13 @@ import { Posts } from './components/Posts';
 import { Quotes } from './components/Quotes';
 HttpClient.setDefaultAxios()
 function App() {
-  const { getProducts} = useContext(MainContext);
+  const { getProducts, getCategory} = useContext(MainContext);
 
 
 
   useEffect(() => {
     getProducts()
+    getCategory()
   }, [])
 
   return (

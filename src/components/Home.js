@@ -6,19 +6,23 @@ import { MainContext } from './Context/MainProvider'
 import { Loading } from '../Loading'
 import { _ } from 'lodash'
 import ReactPaginate from 'react-paginate'
+import { getCategoryProducts  } from './api/index'
 
 
  
  export const Home = () => {
     const [skipNo, setSkipNo] = useState(0)
-    const { allItems, getProducts, productLoading } = useContext(MainContext);
-    console.log(allItems)
+    const [ProductsCategory, setProductsCategory] = useState("ALL")
+    const { allItems, getProducts, productLoading, category } = useContext(MainContext);
+    // const [filter, setFilter] =useState(allItems);
+     
+    // console.log(allItems)
 
 
 
 
     const handleOnPage = (data) => {
-        console.log(data)
+        // console.log(data)
         let PageNo = data.selected + 1;
         
         getProducts(PageNo)
@@ -26,17 +30,42 @@ import ReactPaginate from 'react-paginate'
        
     }
 
+const handleFetchCategory = (item) => {
+    console.log(item)
+    // if(item === "ALL"){
+    //     console.log(allItems)
+    // }
+    // else{
+    //     getCategoryProducts(item).then((res) => console.log(res.data)).catch((err) => console.log([]))
+    // }
+   console.log(item)
+}
+
 
     return (
         <div>
             <h1>
                 HOME
             </h1>
+            <div className="container" style={{ width: "300px" }}>
+          <div className="dropdown"  >
+            <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {ProductsCategory}
+            </button>
+            <ul className="dropdown-menu">
+              <li className="btn btn-light  " style={{ height: 40, width: 250, margin: 2 }}  onClick={ () => handleFetchCategory("ALL")}>ALL</li>
+              {category.map((item) => (
+                <li className="btn btn-light  " style={{ height: 40, width: 250, margin: 2 }} onClick={ () => handleFetchCategory(item)} >{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+    
             {
                 productLoading ? <>
                     <Loading />
                 </> :
-
+                    
                     <div className='margin '>
                         <div className="container-fluid  text-center">
                             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
