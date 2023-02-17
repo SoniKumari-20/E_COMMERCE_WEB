@@ -15,6 +15,7 @@ import { Todos } from './components/Todos';
 import { Comments } from './components/Comments';
 import { Posts } from './components/Posts';
 import { Quotes } from './components/Quotes';
+import { Protected, Public } from './components/utils';
 HttpClient.setDefaultAxios()
 function App() {
   const { getProducts, getCategory,getCartProducts} = useContext(MainContext);
@@ -32,16 +33,16 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
-        <Route path='/About/:id' element={<About />}></Route>
-        <Route path='/home' element={<Home />}></Route>
-        <Route path='/'  element={<Login />}></Route>
-        <Route path='/cartItems'  element={<CartItems />}></Route>
-        <Route path='/users' element={<Users />}></Route>
-        <Route path='/singleuser/:id' element={<SingleUsers />}></Route>
-        <Route path='/todos' element={<Todos />}></Route>
-        <Route path='/comments' element={<Comments />}></Route>
-        <Route path='/posts' element={<Posts />}></Route>
-        <Route path='/quotes' element={<Quotes />}></Route>
+        <Route path='/About/:id' element={<Protected><About /></Protected>}></Route>
+        <Route path='/home' element={<Protected><Home /></Protected>}></Route>
+        <Route path='/'  element={<Public> <Login /></Public>}></Route>
+        <Route path='/cartItems'  element={<Protected> <CartItems /></Protected>}></Route>
+        <Route path='/users' element={<Protected><Users /></Protected> }></Route>
+        <Route path='/singleuser/:id' element={<Protected> <SingleUsers /></Protected>}></Route>
+        <Route path='/todos' element={<Protected><Todos /></Protected> }></Route>
+        <Route path='/comments' element={<Protected><Comments /></Protected> }></Route>
+        <Route path='/posts' element={<Protected><Posts /></Protected> }></Route>
+        <Route path='/quotes' element={<Protected> <Quotes /></Protected>}></Route>
 
         
       </Routes>

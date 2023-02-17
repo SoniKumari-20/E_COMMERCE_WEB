@@ -6,14 +6,13 @@ import { MainContext } from './Context/MainProvider'
 import { Loading } from '../Loading'
 import { _ } from 'lodash'
 import ReactPaginate from 'react-paginate'
-import { getCategoryProducts  } from './api/index'
+import { getCategoryProducts, getFilterProducts  } from './api/index'
 
 
 export const Home = () => {
     const [skipNo, setSkipNo] = useState(0);
-    
-    const [ProductsCategory, setProductsCategory] = useState("ALL")
-    const { allItems, getProducts, productLoading, category } = useContext(MainContext);
+    const [search, setSearch] = useState("");
+    const { allItems, getProducts, productLoading, category, setAllItems } = useContext(MainContext);
      
     // console.log(allItems)
 
@@ -27,14 +26,13 @@ export const Home = () => {
     }
 
 const handleFetchCategory = (category) => {
-    console.log(category)
-    if(category === "ALL"){
-        console.log(allItems)
-    }
-    else{
-        getCategoryProducts(category).then((res) => console.log(res.data)).catch((err) => console.log([]))
-    }
-   console.log(category)
+    // console.log(category)
+        getCategoryProducts(category).then((res) => setAllItems(res.data)).catch((err) => console.log([]))
+//    console.log(category)
+}
+
+const getFilterProductsData = (productCategory) => {
+    getFilterProducts(productCategory).then((res) => setAllItems(res.data)).catch((err) => console.log(err))
 }
 
 
@@ -43,18 +41,20 @@ const handleFetchCategory = (category) => {
             <h1>
                 HOME
             </h1>
-            <div className="container" style={{ width: "300px" }}>
-          <div className="dropdown"  >
-            <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  {ProductsCategory}
-            </button>
-            <ul className="dropdown-menu">
-              <li className="btn btn-light  " style={{ height: 40, width: 250, margin: 2 }}  onClick={ () => handleFetchCategory("ALL")}>ALL</li>
-              {category.map((item) => (
-                <li className="btn btn-light  " style={{ height: 40, width: 250, margin: 2 }} onClick={ () => handleFetchCategory(item)} >{item}</li>
-              ))}
-            </ul>
-          </div>
+            <div className='searchBox '>
+            <input type='text'  placeholder='search products'   onChange={(e)=>getFilterProductsData(e.target.value)}></input>
+            </div>
+
+            <div className='d-flex justify-content-center'>
+            <div className='CategoryBtns' style={{ width: "70%" }}>
+          {
+            category.map((items) => 
+            <div style={{margin:"4px"}}>
+                <button className='btn btn-outline-light' style={{width:"145px"}} onClick={()=> handleFetchCategory(items)}>{items}</button>
+            </div>
+            )
+          }
+        </div>
         </div>
     
             {
