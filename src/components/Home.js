@@ -9,36 +9,32 @@ import ReactPaginate from 'react-paginate'
 import { getCategoryProducts  } from './api/index'
 
 
- 
- export const Home = () => {
-    const [skipNo, setSkipNo] = useState(0)
+export const Home = () => {
+    const [skipNo, setSkipNo] = useState(0);
+    
     const [ProductsCategory, setProductsCategory] = useState("ALL")
     const { allItems, getProducts, productLoading, category } = useContext(MainContext);
-    // const [filter, setFilter] =useState(allItems);
      
     // console.log(allItems)
 
-
-
+   
 
     const handleOnPage = (data) => {
         // console.log(data)
         let PageNo = data.selected + 1;
-        
         getProducts(PageNo)
         setSkipNo(PageNo)
-       
     }
 
-const handleFetchCategory = (item) => {
-    console.log(item)
-    // if(item === "ALL"){
-    //     console.log(allItems)
-    // }
-    // else{
-    //     getCategoryProducts(item).then((res) => console.log(res.data)).catch((err) => console.log([]))
-    // }
-   console.log(item)
+const handleFetchCategory = (category) => {
+    console.log(category)
+    if(category === "ALL"){
+        console.log(allItems)
+    }
+    else{
+        getCategoryProducts(category).then((res) => console.log(res.data)).catch((err) => console.log([]))
+    }
+   console.log(category)
 }
 
 

@@ -3,13 +3,16 @@ import React, { useContext, useState, useEffect } from 'react'
 import { MainContext } from './Context/MainProvider'
 import { Link } from 'react-router-dom'
 
+
+
 export const CartItems = () => {
-  const { cartItems, allItems, setCartItems } = useContext(MainContext)
+  const { cartItems,cartItemData, setCartItems } = useContext(MainContext)
   const [totalPrice, setTotalPrice] = useState(0)
-  // console.log(cartItems)
+  // console.log(data)
   const cartItemId = cartItems.map((e) => e.id)
   // console.log(cartItemId) 
-  const AllCartProducts = allItems?.products?.filter(e => cartItemId.includes(e.id));
+
+  const AllCartProducts = cartItemData?.products?.filter(e => cartItemId.includes(e.id));
   // console.log(AllCartProducts)
 
   const handleRemove = (id) => {

@@ -4,6 +4,7 @@ import {
     getAllProductsData,
     getAllUsers,
     getAllposts,
+    getAllCartData,
     getAllComments,
     getAllQuotes,
     getAllTodos,
@@ -23,16 +24,21 @@ export const MainProvider = ({ children }) => {
     const [AllTodos, setAllTodos] = useState([])
     const [AllQuotes, setAllQuotes] = useState([])
     const [category, setCategory] = useState([])
+    const [cartItemData, setCartItemData] = useState([])
 
 
 
+    const getCartProducts = async () => {
+        getAllCartData().then((res) => setCartItemData(res.data)).catch((err) => console.log(err))
+    }
 
-    const getProducts = async (PageNo = 1) => {
+
+    const getProducts = async (PageNo=2) => {
         let skip = 20 * PageNo - 20
         setProductLoading(true)
         getAllProductsData({ skip }).then((res) => {
             setAllItems(res.data);
-            setProductLoading(false)
+            setProductLoading(false);
         }
         ).catch((err) => err)
     }
@@ -123,7 +129,9 @@ export const MainProvider = ({ children }) => {
                     getAllTodo,
                     AllTodos,
                     getCategory,
-                    category
+                    category,
+                    getCartProducts,
+                    cartItemData
                     
 
                 }}

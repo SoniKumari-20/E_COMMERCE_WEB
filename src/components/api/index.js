@@ -1,8 +1,18 @@
 import { HttpClient } from "./HttpClient"
 
+
+
 const getAllProductsData = ({ skip = 0} = {}) => {
     const apiData = {
         url: `/products?limit=20&skip=${skip}`,
+        method: "GET",
+    }
+    return HttpClient.custom(apiData)
+}
+
+const getAllCartData = ({ skip = 0} = {}) => {
+    const apiData = {
+        url: `/products?limit=100&skip=${skip}`,
         method: "GET",
     }
     return HttpClient.custom(apiData)
@@ -151,5 +161,6 @@ export {
     getAllQuotes,
     getSingleQuote,
     getAllTodos,
-    getSingleTodo
+    getSingleTodo,
+    getAllCartData
 }
