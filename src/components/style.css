@@ -29,14 +29,12 @@
 .searchBox {
   margin-left: 75%;
   margin-top: -45px;
-  height: 20px;
-}
-.searchBox input{
+  height: 35px;
+  width: 300px;
   border-radius: 10px;
-
 }
 
-
+  
 
 /* ===== Google Font Import - Poppins ===== */
 *{

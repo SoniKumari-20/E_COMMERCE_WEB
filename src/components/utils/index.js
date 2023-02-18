@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 
 export const Protected = ({ children }) => {
     const isLogin = localStorage.getItem("Token");
-    console.log(isLogin)
+    // console.log(isLogin)
     if (!isLogin) return <Navigate to={"/"} />
     return <>{children}</>;
 }

@@ -16,6 +16,9 @@ export const Header = () => {
     <div>
       <nav>
         <div className="logo">Brand</div>
+       {
+        localStorage.getItem("Token") ? 
+        <>
         <input type="checkbox" id="click" />
         <label for="click" className="menu-btn">
           <i className="fas fa-bars"></i>
@@ -35,6 +38,11 @@ export const Header = () => {
           </div></Link>
           <li className="btn btn-outline-light my-2 my-sm-0" onClick={handleLogout}>LogOut</li>
         </ul>
+        </> :
+        <></>
+       }
+
+        
       </nav>
 
     </div>

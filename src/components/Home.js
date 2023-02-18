@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import './style.css'
 import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -6,17 +6,13 @@ import { MainContext } from './Context/MainProvider'
 import { Loading } from '../Loading'
 import { _ } from 'lodash'
 import ReactPaginate from 'react-paginate'
-import { getCategoryProducts, getFilterProducts  } from './api/index'
+import { getCategoryProducts, getFilterProducts } from './api/index'
 
 
 export const Home = () => {
     const [skipNo, setSkipNo] = useState(0);
-    const [search, setSearch] = useState("");
     const { allItems, getProducts, productLoading, category, setAllItems } = useContext(MainContext);
-     
     // console.log(allItems)
-
-   
 
     const handleOnPage = (data) => {
         // console.log(data)
@@ -25,43 +21,64 @@ export const Home = () => {
         setSkipNo(PageNo)
     }
 
-const handleFetchCategory = (category) => {
-    // console.log(category)
+
+    const handleFetchCategory = (category) => {
         getCategoryProducts(category).then((res) => setAllItems(res.data)).catch((err) => console.log([]))
-//    console.log(category)
-}
 
-const getFilterProductsData = (productCategory) => {
-    getFilterProducts(productCategory).then((res) => setAllItems(res.data)).catch((err) => console.log(err))
-}
+        //    console.log(category)
+    }
 
+    const getFilterProductsData = (productCategory) => {
+        const { value } = productCategory.target;
+        getFilterProducts(value).then((res) => setAllItems(res.data)).catch((err) => console.log(err))
+    }
+  
+
+    const debounce = (fun, d) => {
+        let timer;
+        return function (...args) {
+            let context = this;
+            if (timer) clearTimeout(timer);
+            timer = setTimeout(() => {
+                timer = null
+                fun.apply(context, args)
+            }, d);
+
+        }
+    }
+    const betterPerformance = useCallback(debounce(getFilterProductsData, 1000))
 
     return (
         <div>
             <h1>
                 HOME
             </h1>
-            <div className='searchBox '>
-            <input type='text'  placeholder='search products'   onChange={(e)=>getFilterProductsData(e.target.value)}></input>
-            </div>
+
+            <input type='text' className='searchBox' placeholder='search products' onChange={betterPerformance}></input>
+
 
             <div className='d-flex justify-content-center'>
-            <div className='CategoryBtns' style={{ width: "70%" }}>
-          {
-            category.map((items) => 
-            <div style={{margin:"4px"}}>
-                <button className='btn btn-outline-light' style={{width:"145px"}} onClick={()=> handleFetchCategory(items)}>{items}</button>
+                <div className='CategoryBtns' style={{ width: "70%" }}>
+                    {/* <div style={{margin:"4px"}}>
+                <button className='btn btn-outline-light' style={{width:"145px"}} onClick={()=> handleFetchCategory("ALL")}>All</button>
+            </div> */}
+                    {
+                        category.map((items) =>
+                            <div style={{ margin: "4px" }}>
+                                <button className='btn btn-outline-light  categoryBtn ' 
+                                 style={{ width: "145px" }} 
+                                 onClick={() => handleFetchCategory(items)}>{items}</button>
+                            </div>
+                        )
+                    }
+                </div>
             </div>
-            )
-          }
-        </div>
-        </div>
-    
+
             {
                 productLoading ? <>
                     <Loading />
                 </> :
-                    
+
                     <div className='margin '>
                         <div className="container-fluid  text-center">
                             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
@@ -71,7 +88,7 @@ const getFilterProductsData = (productCategory) => {
                                             <div className="card  cart_item  box1 " key={id + 1} >
                                                 <img className="card-img-top" src={items?.images[0]} alt="Card image cap" height={"200px"} />
                                                 <div className="card-body text-center " height={"230px"} width={"230px"}>
-                                                    <h5 className="card-title">{(items?.title).substring(0,18)}</h5>
+                                                    <h5 className="card-title">{(items?.title).substring(0, 18)}</h5>
                                                     <p className="card-text">{(items?.description).substring(0, 18)}...</p>
                                                     <h6>$ {items?.price}</h6>
                                                     <div className="d-grid gap-2">
@@ -85,29 +102,29 @@ const getFilterProductsData = (productCategory) => {
                                     )}
                             </div>
                         </div>
-                                        <ReactPaginate 
-                                        previousLabel={"previous"}
-                                        nextLabel={'next'}
-                                        pageCount = {5}
-                                        pageRangeDisplayed={2}
-                                        marginPagesDisplayed={2}
-                                        onPageChange = {handleOnPage}
-                                        containerClassName={"pagination justify-content-center"}
-                                        pageClassName={"page-item"}
-                                        pageLinkClassName={"page-link"}
-                                        previousClassName = { "page-item " }
-                                        previousLinkClassName = { "page-link" }
-                                        nextClassName = {"page-item"}
-                                        nextLinkClassName = { "page-link" }
-                                        activeClassName = {"active"}
-                                        >
-                                            
-                                        </ReactPaginate>
+                        <ReactPaginate
+                            previousLabel={"previous"}
+                            nextLabel={'next'}
+                            pageCount={5}
+                            pageRangeDisplayed={2}
+                            marginPagesDisplayed={2}
+                            onPageChange={handleOnPage}
+                            containerClassName={"pagination justify-content-center"}
+                            pageClassName={"page-item"}
+                            pageLinkClassName={"page-link"}
+                            previousClassName={"page-item "}
+                            previousLinkClassName={"page-link"}
+                            nextClassName={"page-item"}
+                            nextLinkClassName={"page-link"}
+                            activeClassName={"active"}
+                        >
+
+                        </ReactPaginate>
                     </div>
-                    
+
             }
 
-            
+
         </div>
     )
 }
