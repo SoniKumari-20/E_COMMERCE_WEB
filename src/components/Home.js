@@ -11,8 +11,11 @@ import { getCategoryProducts, getFilterProducts } from './api/index'
 
 export const Home = () => {
     const [skipNo, setSkipNo] = useState(0);
-    const { allItems, getProducts, productLoading, category, setAllItems } = useContext(MainContext);
-    // console.log(allItems)
+    const { allItems, getProducts, productLoading, category, setAllItems, cartItemData } = useContext(MainContext);
+    // const [AllTypeData, setAllTypeData] = useState(allItems)
+    const [filter, setFilter] = useState([])
+    const [filterobj, setFilterObj] = useState({})
+    const [btn, setBtns] = useState([{}])
 
     const handleOnPage = (data) => {
         // console.log(data)
@@ -21,18 +24,62 @@ export const Home = () => {
         setSkipNo(PageNo)
     }
 
+    function FilterALLCategoryData() {
+        // let filterobj = {}
+        let cats = filter.category;
+        let Data = [filter];
+        // console.log(cats, Data)
+        if (filterobj[cats]) {
+            (delete filterobj[cats])
+        } else {
+            (filterobj[cats] = Data)
+        }
+        let arr = []
+        Object.values(filterobj).forEach((e) => {
+            arr = [arr, e]
+            // console.log(arr)
+            // setFilterObj(arr)
+        })
+    }
+
+
+
+
+
+
+    useEffect(() => {
+        FilterALLCategoryData()
+       setFilterObj(filterobj)
+    }, [filter])
+    // console.log(filterobj)
 
     const handleFetchCategory = (category) => {
-        getCategoryProducts(category).then((res) => setAllItems(res.data)).catch((err) => console.log([]))
+        let filterbtn = btn
+        if(filterbtn[category]){
+            delete filterbtn[category] 
+        }else{
+            filterbtn[category] = true
+        }
+       setBtns(filterbtn)
 
+        if (category === "ALL") {
+            setAllItems(cartItemData)
+        } else {
+            getCategoryProducts(category).then((res) => {
+             setAllItems(res.data);    setFilter(res.data)
+            }).catch((err) => console.log([]))
+        }
+        setAllItems(filterobj)
         //    console.log(category)
+        // return ("ALL")
     }
 
+    useEffect(() => { }, [allItems])
     const getFilterProductsData = (productCategory) => {
         const { value } = productCategory.target;
-        getFilterProducts(value).then((res) => setAllItems(res.data)).catch((err) => console.log(err))
+        getFilterProducts(value).then((res) => { setAllItems(res.data) }).catch((err) => console.log(err))
     }
-  
+
 
     const debounce = (fun, d) => {
         let timer;
@@ -43,7 +90,6 @@ export const Home = () => {
                 timer = null
                 fun.apply(context, args)
             }, d);
-
         }
     }
     const betterPerformance = useCallback(debounce(getFilterProductsData, 1000))
@@ -59,15 +105,15 @@ export const Home = () => {
 
             <div className='d-flex justify-content-center'>
                 <div className='CategoryBtns' style={{ width: "70%" }}>
-                    {/* <div style={{margin:"4px"}}>
-                <button className='btn btn-outline-light' style={{width:"145px"}} onClick={()=> handleFetchCategory("ALL")}>All</button>
-            </div> */}
+                    <div style={{ margin: "4px" }}>
+                        <button className='btn btn-outline-light' style={{ width: "145px" }} onClick={() => handleFetchCategory("ALL")}>ALL</button>
+                    </div>
                     {
                         category.map((items) =>
                             <div style={{ margin: "4px" }}>
-                                <button className='btn btn-outline-light  categoryBtn ' 
-                                 style={{ width: "145px" }} 
-                                 onClick={() => handleFetchCategory(items)}>{items}</button>
+                                <button className={`btn btn-outline-light ` }
+                                    style={{ width: "145px" }}
+                                    onClick={() => handleFetchCategory(items)}>{items}</button>
                             </div>
                         )
                     }

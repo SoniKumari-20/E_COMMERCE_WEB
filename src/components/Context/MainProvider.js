@@ -25,7 +25,6 @@ export const MainProvider = ({ children }) => {
     const [AllQuotes, setAllQuotes] = useState([])
     const [category, setCategory] = useState([])
     const [cartItemData, setCartItemData] = useState([])
-    const [data, setData]= useState(allItems)
 
 
 
@@ -113,7 +112,6 @@ export const MainProvider = ({ children }) => {
                 value={{
                     getProducts,
                     allItems,
-                   data,
                     setAllItems,
                     loading,
                     handleAddDataIntoCart,
