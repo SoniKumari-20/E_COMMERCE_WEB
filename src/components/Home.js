@@ -16,63 +16,39 @@ export const Home = () => {
     const [filter, setFilter] = useState([])
     const [filterobj, setFilterObj] = useState({})
     const [btn, setBtns] = useState([{}])
+    const [categoryObj,setCategoryObj] = useState({})
 
     const handleOnPage = (data) => {
-        // console.log(data)
         let PageNo = data.selected + 1;
         getProducts(PageNo)
         setSkipNo(PageNo)
     }
 
-    function FilterALLCategoryData() {
-        // let filterobj = {}
-        let cats = filter.category;
-        let Data = [filter];
-        // console.log(cats, Data)
-        if (filterobj[cats]) {
-            (delete filterobj[cats])
-        } else {
-            (filterobj[cats] = Data)
-        }
-        let arr = []
-        Object.values(filterobj).forEach((e) => {
-            arr = [arr, e]
-            // console.log(arr)
-            // setFilterObj(arr)
+    const getFilterCategoryObjProducts = () => {
+        let prodTemp = []
+        Object.values(categoryObj).forEach((val)=>{
+            prodTemp = [...prodTemp,...val]
         })
+        // prodTemp.
+        setAllItems({products:prodTemp.reverse()})
     }
 
+    useEffect(()=>{
+        getFilterCategoryObjProducts()
+    },[categoryObj])
 
 
 
 
 
-    useEffect(() => {
-        FilterALLCategoryData()
-       setFilterObj(filterobj)
-    }, [filter])
-    // console.log(filterobj)
 
-    const handleFetchCategory = (category) => {
-        let filterbtn = btn
-        if(filterbtn[category]){
-            delete filterbtn[category] 
-        }else{
-            filterbtn[category] = true
-        }
-       setBtns(filterbtn)
 
-        if (category === "ALL") {
-            setAllItems(cartItemData)
-        } else {
-            getCategoryProducts(category).then((res) => {
-             setAllItems(res.data);    setFilter(res.data)
-            }).catch((err) => console.log([]))
-        }
-        setAllItems(filterobj)
-        //    console.log(category)
-        // return ("ALL")
-    }
+    // useEffect(() => {
+    //     FilterALLCategoryData()
+    //    setFilterObj(filterobj)
+    // }, [filter])
+
+    
 
     useEffect(() => { }, [allItems])
     const getFilterProductsData = (productCategory) => {
@@ -94,6 +70,19 @@ export const Home = () => {
     }
     const betterPerformance = useCallback(debounce(getFilterProductsData, 1000))
 
+    const handleFetchCategory = async (itemName) => {
+        let categoryObjTemp = {...categoryObj};
+        if(categoryObjTemp[itemName]){
+            delete categoryObjTemp[itemName]
+        }else{
+            let response = await getCategoryProducts(itemName);
+            categoryObjTemp[itemName] = response?.data?.products;
+        }
+        setCategoryObj(categoryObjTemp)
+    }
+
+    console.log(categoryObj,"cate")
+
     return (
         <div>
             <h1>
@@ -106,12 +95,12 @@ export const Home = () => {
             <div className='d-flex justify-content-center'>
                 <div className='CategoryBtns' style={{ width: "70%" }}>
                     <div style={{ margin: "4px" }}>
-                        <button className='btn btn-outline-light' style={{ width: "145px" }} onClick={() => handleFetchCategory("ALL")}>ALL</button>
+                        {/* <button className='btn btn-outline-light' style={{ width: "145px" }} onClick={() => handleFetchCategory("ALL")}>ALL</button> */}
                     </div>
                     {
                         category.map((items) =>
                             <div style={{ margin: "4px" }}>
-                                <button className={`btn btn-outline-light ` }
+                                <button className={`btn ${categoryObj[items] ?"btn-light" : "btn-outline-light" }`}
                                     style={{ width: "145px" }}
                                     onClick={() => handleFetchCategory(items)}>{items}</button>
                             </div>
