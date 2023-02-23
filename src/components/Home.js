@@ -11,11 +11,7 @@ import { getCategoryProducts, getFilterProducts } from './api/index'
 
 export const Home = () => {
     const [skipNo, setSkipNo] = useState(0);
-    const { allItems, getProducts, productLoading, category, setAllItems, cartItemData } = useContext(MainContext);
-    // const [AllTypeData, setAllTypeData] = useState(allItems)
-    const [filter, setFilter] = useState([])
-    const [filterobj, setFilterObj] = useState({})
-    const [btn, setBtns] = useState([{}])
+    const { allItems, getProducts, productLoading, category, setAllItems, cartItemData, alltypedata, setProductLoading} = useContext(MainContext);
     const [categoryObj,setCategoryObj] = useState({})
 
     const handleOnPage = (data) => {
@@ -24,23 +20,21 @@ export const Home = () => {
         setSkipNo(PageNo)
     }
 
-    const getFilterCategoryObjProducts = () => {
+    const getFilterCategoryObjProducts = (items) => {
+        if(items=== "ALL"){
+            setAllItems(cartItemData)
+        }else{
         let prodTemp = []
         Object.values(categoryObj).forEach((val)=>{
             prodTemp = [...prodTemp,...val]
         })
         // prodTemp.
-        setAllItems({products:prodTemp.reverse()})
+        setAllItems({products:prodTemp.reverse()})}
     }
 
     useEffect(()=>{
         getFilterCategoryObjProducts()
     },[categoryObj])
-
-
-
-
-
 
 
     // useEffect(() => {
@@ -71,12 +65,14 @@ export const Home = () => {
     const betterPerformance = useCallback(debounce(getFilterProductsData, 1000))
 
     const handleFetchCategory = async (itemName) => {
+        setProductLoading(true)
         let categoryObjTemp = {...categoryObj};
         if(categoryObjTemp[itemName]){
             delete categoryObjTemp[itemName]
         }else{
             let response = await getCategoryProducts(itemName);
             categoryObjTemp[itemName] = response?.data?.products;
+            setProductLoading(false)
         }
         setCategoryObj(categoryObjTemp)
     }
@@ -88,14 +84,20 @@ export const Home = () => {
             <h1>
                 HOME
             </h1>
+            <div className='d-flex justify-content-space-between'>
+            <span className='AddProducts'>
+                ADD Product
+            <Link to="/addProducts">
+            <i className='fa fa-plus'></i></Link>
+            </span>
+            
 
             <input type='text' className='searchBox' placeholder='search products' onChange={betterPerformance}></input>
-
-
+            </div>
             <div className='d-flex justify-content-center'>
                 <div className='CategoryBtns' style={{ width: "70%" }}>
                     <div style={{ margin: "4px" }}>
-                        {/* <button className='btn btn-outline-light' style={{ width: "145px" }} onClick={() => handleFetchCategory("ALL")}>ALL</button> */}
+                        <button className={`btn ${categoryObj["ALL"] ?"btn-light" : "btn-outline-light" }`} style={{ width: "145px" }} onClick={() => getFilterCategoryObjProducts("ALL")}>ALL</button>
                     </div>
                     {
                         category.map((items) =>
@@ -140,9 +142,9 @@ export const Home = () => {
                         <ReactPaginate
                             previousLabel={"previous"}
                             nextLabel={'next'}
-                            pageCount={5}
-                            pageRangeDisplayed={2}
-                            marginPagesDisplayed={2}
+                            pageCount={6}
+                            pageRangeDisplayed={3}
+                            marginPagesDisplayed={3}
                             onPageChange={handleOnPage}
                             containerClassName={"pagination justify-content-center"}
                             pageClassName={"page-item"}

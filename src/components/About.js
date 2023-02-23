@@ -63,6 +63,7 @@ export const About = () => {
                                     </div>
                                     <div class="button1">
                                         <button onClick={() => handleAddToCart(item?.id)}>Add To Cart</button>
+                                        <Link to={`/updateProducts/${item?.id}`   } ><button >UpdateProducts</button></Link>
                                     </div>
                                 </div>
                                 <div class="box two">
@@ -99,6 +100,7 @@ export const About = () => {
 
 
             }
+
 
 
 

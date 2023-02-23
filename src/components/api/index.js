@@ -51,6 +51,28 @@ const getCategoryProducts = (category) => {
     }
     return HttpClient.custom(apiData)
 }
+
+
+
+const getAddProducts = (productsData) => {
+    const apiData = {
+        url: `/products/add`,
+        method: "POST",
+        data: productsData
+    }
+    return HttpClient.custom(apiData)
+}
+
+const getUpdateProducts = (category,proCategoryForUpdate) => {
+    const apiData = {
+        url: `products/${category}`,
+        method: "PUT",
+        data: proCategoryForUpdate
+    }
+    return HttpClient.custom(apiData)
+}
+
+
 const getLoginUser = (userData) => {
     const apiData = {
         url: `/auth/login`,
@@ -162,5 +184,7 @@ export {
     getSingleQuote,
     getAllTodos,
     getSingleTodo,
-    getAllCartData
+    getAllCartData,
+    getAddProducts,
+    getUpdateProducts
 }

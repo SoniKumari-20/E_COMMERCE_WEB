@@ -17,6 +17,7 @@ export const MainProvider = ({ children }) => {
     const [allItems, setAllItems] = useState([]);
     const [loading, setLoading] = useState(false);
     const [cartItems, setCartItems] = useState([]);
+    const [alltypedata, setAllTypeData] = useState([])
     const [users, setUsers] = useState([]);
     const [productLoading, setProductLoading] = useState(false)
     const [AllPosts, setAllPosts] = useState([]);
@@ -25,7 +26,6 @@ export const MainProvider = ({ children }) => {
     const [AllQuotes, setAllQuotes] = useState([])
     const [category, setCategory] = useState([])
     const [cartItemData, setCartItemData] = useState([])
-
 
 
     const getCartProducts = async () => {
@@ -38,6 +38,7 @@ export const MainProvider = ({ children }) => {
         setProductLoading(true)
         getAllProductsData({ skip }).then((res) => {
             setAllItems(res.data);
+            console.log(res.data)
             setProductLoading(false);
         }
         ).catch((err) => err)
@@ -114,6 +115,7 @@ export const MainProvider = ({ children }) => {
                     allItems,
                     setAllItems,
                     loading,
+                    setProductLoading,
                     handleAddDataIntoCart,
                     cartItems,
                     setCartItems,
@@ -131,8 +133,8 @@ export const MainProvider = ({ children }) => {
                     getCategory,
                     category,
                     getCartProducts,
-                    cartItemData
-                    
+                    cartItemData,
+                    alltypedata, setAllTypeData
 
                 }}
             >

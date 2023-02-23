@@ -240,3 +240,67 @@
     background-color: #ffb4c4;
     box-shadow: 1px 2px 8px 2px rgb(49, 40, 40);
   }
+
+
+
+  /* addProducts */
+  
+
+.container {
+  position: relative;
+  max-width: 500px;
+  margin-top: 30px;
+  width: 100%;
+  padding: 25px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+.container header {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+}
+.container .form2 {
+  margin-top: 30px;
+}
+.form2 .field {
+  margin-bottom: 20px;
+}
+ .input-field {
+  position: relative;
+  height: 55px;
+  width: 100%;
+}
+input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  padding: 0 15px;
+  border: 1px solid #d1d1d1;
+  color: black;
+  
+}
+.button {
+  margin: 25px 0 3px;
+  
+}
+
+.button input:hover {
+  background-color: #0e4bf1;
+}
+.input-field button{
+  margin-left: 5px;
+  width: 195px;
+
+}
+.doubleItem{
+  width: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.button{
+  background: none;
+}

@@ -27,13 +27,27 @@
   box-shadow: 1px 1px 6px 2px rgb(151, 149, 149);
 }
 .searchBox {
-  margin-left: 75%;
+  margin-left: 60%;
   margin-top: -45px;
-  height: 35px;
+  height: 40px;
   width: 300px;
   border-radius: 10px;
 }
-
+.AddProducts{
+  margin-left: 25px;
+  margin-top: -45px;
+  height: 40px;
+  width: 200px;
+  /* border: 2px solid white; */
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px 1px gray;
+  color: white;
+  padding: 5px;
+}
+.AddProducts i{
+  margin-left: 20px;
+  font-size: 25px;
+}
   
 
 /* ===== Google Font Import - Poppins ===== */

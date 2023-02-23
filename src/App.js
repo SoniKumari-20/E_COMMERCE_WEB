@@ -16,6 +16,8 @@ import { Comments } from './components/Comments';
 import { Posts } from './components/Posts';
 import { Quotes } from './components/Quotes';
 import { Protected, Public } from './components/utils';
+import { AddProducts } from './components/productsOperation/AddProducts';
+import { UpdateProducts } from './components/productsOperation/UpdateProducts';
 HttpClient.setDefaultAxios()
 function App() {
   const { getProducts, getCategory,getCartProducts} = useContext(MainContext);
@@ -43,6 +45,8 @@ function App() {
         <Route path='/comments' element={<Protected><Comments /></Protected> }></Route>
         <Route path='/posts' element={<Protected><Posts /></Protected> }></Route>
         <Route path='/quotes' element={<Protected> <Quotes /></Protected>}></Route>
+        <Route path='/addProducts' element={<Protected> <AddProducts></AddProducts> </Protected>} ></Route>
+        <Route path='/updateProducts/:id'  element={<Protected><UpdateProducts /> </Protected>}></Route>
 
         
       </Routes>
