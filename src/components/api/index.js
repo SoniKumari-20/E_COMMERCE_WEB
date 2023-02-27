@@ -12,7 +12,7 @@ const getAllProductsData = ({ skip = 0} = {}) => {
 
 const getAllCartData = ({ skip = 0} = {}) => {
     const apiData = {
-        url: `/products?limit=100&skip=${skip}`,
+        url: `/products?limit=120&skip=${skip}`,
         method: "GET",
     }
     return HttpClient.custom(apiData)

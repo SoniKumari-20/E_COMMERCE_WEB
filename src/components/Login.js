@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { getLoginUser } from './api';
 import swal from 'sweetalert';
+import './style.css'
 
 
 
@@ -54,11 +55,11 @@ const getloginData =  async () => {
                 <h1>Login</h1>
             <div style={{margin: "20px"}}>
                 <label >Email or Phone</label>
-                <input type="text" placeholder = "Enter username"  name='username' id='username' value={userData.username} onChange={ DataCollection} />
+                <input className='input' type="text" placeholder = "Enter username"  name='username' id='username' value={userData.username} onChange={ DataCollection} />
                 <label>Password</label>
-                <input type="password" placeholder = "Enter  Password"  name='password' id='password' value={userData.password}  onChange={ DataCollection}/>
+                <input className='input' type="password" placeholder = "Enter  Password"  name='password' id='password' value={userData.password}  onChange={ DataCollection}/>
                 {/* <a href="#">Forgot Password?</a> */}
-                <button className = 'button' onClick={ getloginData}>Submit</button>
+                <button className = 'Loginbtn' onClick={ getloginData}>Submit</button>
                 {/* <div class="link">Not a member? <a href="#">Sigup here</a></div> */}
             </div>
             </div>

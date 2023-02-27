@@ -15,6 +15,7 @@ export const MainContext = createContext({})
 
 export const MainProvider = ({ children }) => {
     const [allItems, setAllItems] = useState([]);
+    const [localData, setLocalData] = useState([JSON.parse(localStorage.getItem("Products"))])
     const [loading, setLoading] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [alltypedata, setAllTypeData] = useState([])
@@ -26,7 +27,7 @@ export const MainProvider = ({ children }) => {
     const [AllQuotes, setAllQuotes] = useState([])
     const [category, setCategory] = useState([])
     const [cartItemData, setCartItemData] = useState([])
-
+// console.log((allItems.products), localData)
 
     const getCartProducts = async () => {
         getAllCartData().then((res) => setCartItemData(res.data)).catch((err) => console.log(err))
@@ -37,8 +38,9 @@ export const MainProvider = ({ children }) => {
         let skip = 20 * PageNo - 20
         setProductLoading(true)
         getAllProductsData({ skip }).then((res) => {
-            setAllItems(res.data);
-            console.log(res.data)
+            setAllItems((res.data));
+            // console.log(localData)
+
             setProductLoading(false);
         }
         ).catch((err) => err)
@@ -134,8 +136,8 @@ export const MainProvider = ({ children }) => {
                     category,
                     getCartProducts,
                     cartItemData,
-                    alltypedata, setAllTypeData
-
+                    alltypedata, setAllTypeData,
+                    localData, setLocalData
                 }}
             >
                 {children}

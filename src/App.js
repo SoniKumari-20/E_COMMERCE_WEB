@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { HttpClient } from './components/api/HttpClient';
 import { MainContext } from './components/Context/MainProvider';
@@ -21,6 +21,7 @@ import { UpdateProducts } from './components/productsOperation/UpdateProducts';
 HttpClient.setDefaultAxios()
 function App() {
   const { getProducts, getCategory,getCartProducts} = useContext(MainContext);
+ 
 
 
 
@@ -28,7 +29,6 @@ function App() {
     getProducts()
     getCategory()
     getCartProducts()
-
   }, [])
 
   return (

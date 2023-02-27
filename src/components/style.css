@@ -221,10 +221,11 @@ label{
     margin-top: 10px;
 }
 
-input{
+.input{
     display: block;
-    width: 90%;
+    width: 100%;
     background: transparent;
+    /* height: 30px; */
     /* border: none; */
     outline: none;
     border-bottom: 1px solid white;
@@ -232,9 +233,9 @@ input{
     color: white;
 }
 
-.button{
+.Loginbtn{
     display: block;
-    width: 95%;
+    width: 100%;
     padding: 8px;
     border: none;
     outline: none;
